@@ -1,15 +1,34 @@
-package com.shopwebapp.auth.domain;
+package com.shopwebapp.auth.domain.model;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.function.Function;
 
-public class UserModel implements UserDetails {
+public class User implements UserDetails {
+    private String username;
+    private String password;
+    private String email;
+    private String phone;
+    private String fullName;
+    private String address;
+    private String image;
+    private Boolean isActive;
+    private Date dateOfBirth;
+    private Set<String> authorities;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        Function<Set<String>, List<SimpleGrantedAuthority>> authorities = roles -> {
+            return roles.stream().map()
+        };
+
+        return authorities.apply(this.authorities);
     }
 
     @Override
@@ -41,4 +60,6 @@ public class UserModel implements UserDetails {
     public boolean isEnabled() {
         return UserDetails.super.isEnabled();
     }
+
+    private
 }
